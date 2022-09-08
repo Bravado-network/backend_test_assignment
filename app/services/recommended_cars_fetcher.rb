@@ -3,14 +3,15 @@ require 'net/http'
 class RecommendedCarsFetcher
   def initialize(user_id)
     @user_id = user_id
-    @uri = recomended_cars_uri
+    @uri = recommended_cars_uri
   end
 
   def fetch
     response = fetch_data
     return [] if response.nil?
 
-    parse(response)
+    recommended = parse(response)
+    hash_by_car_id(recommended)
   end
 
   private
@@ -21,7 +22,7 @@ class RecommendedCarsFetcher
     @logger ||= Rails.logger
   end
 
-  def recomended_cars_uri
+  def recommended_cars_uri
     URI("#{ENV["RECOMMENDATION_SERVICE_URL"]}/recomended_cars.json?user_id=#{user_id}")
   end
 
@@ -38,5 +39,9 @@ class RecommendedCarsFetcher
   rescue JSON::ParserError => e
     logger.error("cannot parse response from #{uri.host}: #{e.message}")
     []
+  end
+
+  def hash_by_car_id(array)
+    array.map { |a| [a["car_id"], a["rank_score"]]}.to_h
   end
 end
