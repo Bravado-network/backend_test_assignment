@@ -26,14 +26,10 @@ class CarOffersFetcher
         name: car.brand_name
       },
       price: car.price,
-      rank_score: car.rank_score.zero? ? nil : car.rank_score,
+      rank_score: car.rank_score.zero? ? nil : car.rank_score.to_f,
       model: car.model,
       label: MATCH_LABEL_MAP[car.match]
     }
-  end
-
-  def recommended_cars
-    @recommended_cars ||= RecommendedCarsFetcher.new(user_id).fetch
   end
 
   def cars_by_args
@@ -56,8 +52,15 @@ class CarOffersFetcher
       .joins("JOIN users ON users.id = #{user_id}")
   end
 
-  def recommended_cars_when_cases
-    recommended_cars.map {|car_id, rank_score| "WHEN cars.id = #{car_id} THEN #{rank_score}" }
+  def rank_score_when_cases
+    recommended = RecommendedCarsFetcher.new(user_id).fetch
+    when_cases = recommended.map do |car_id, rank_score|
+      "WHEN cars.id = #{car_id} THEN #{rank_score}"
+    end
+
+    return 0 if when_cases.blank?
+
+    "CASE #{when_cases.join(" ")} ELSE 0 END"
   end
 
   def add_select_to_scope(scope)
@@ -72,10 +75,7 @@ class CarOffersFetcher
         ) THEN 1
         ELSE 0
       END AS match,
-      CASE
-        #{recommended_cars_when_cases.join(" ")}
-        ELSE 0
-      END AS rank_score
+      #{rank_score_when_cases} AS rank_score
     ")
   end
 
