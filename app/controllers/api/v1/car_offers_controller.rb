@@ -1,6 +1,6 @@
 class Api::V1::CarOffersController < ActionController::API
   def index
-    offers = CarOffersFetcher.new(fetch_params).fetch
+    offers = CarOffersFetcher.new(fetch_params.to_h).fetch
     render json: offers
   end
 
