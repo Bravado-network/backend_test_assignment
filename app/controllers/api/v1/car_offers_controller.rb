@@ -7,8 +7,8 @@ class Api::V1::CarOffersController < ActionController::API
   private
 
   def fetch_params
-    params.permit(*%i[user_id query price_min price_max page]).tap do |permited_params|
-      permited_params.require(:user_id)
-    end
+    params
+      .permit(*%i[user_id query price_min price_max page format])
+      .tap { |permited_params| permited_params.require(:user_id) }
   end
 end

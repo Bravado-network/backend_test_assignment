@@ -69,8 +69,8 @@ class CarOffersFetcher
         WHEN (
           cars.price BETWEEN
             lower(users.preferred_price_range) AND upper(users.preferred_price_range)
-        ) THEN 0
-        ELSE 1
+        ) THEN 1
+        ELSE 0
       END AS match,
       CASE
         #{recommended_cars_when_cases.join(" ")}
