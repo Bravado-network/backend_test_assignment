@@ -76,6 +76,9 @@ GEM
     ffi (1.15.5)
     globalid (1.2.1)
       activesupport (>= 6.1)
+    http-2-next (1.0.1)
+    httpx (1.1.0)
+      http-2-next (>= 1.0.1)
     i18n (1.14.1)
       concurrent-ruby (~> 1.0)
     listen (3.7.1)
@@ -188,6 +191,7 @@ DEPENDENCIES
   bootsnap
   byebug
   database_cleaner-active_record
+  httpx (~> 1.1)
   listen (~> 3.3)
   pg (~> 1.1)
   puma (~> 5.0)
