@@ -22,6 +22,6 @@ class FetchRecommendedCarsService
   attr_reader :user_id
 
   def api_url
-    base_api_url + '?user_id=' + user_id
+    "#{base_api_url}?user_id=#{user_id}"
   end
 end

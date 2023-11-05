@@ -21,6 +21,6 @@ class CarsFinder
   attr_reader :params
 
   def page_number
-    (params.dig(:page) || DEFAULT_PAGE) - 1
+    (params[:page] || DEFAULT_PAGE) - 1
   end
 end

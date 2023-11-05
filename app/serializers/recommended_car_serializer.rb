@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class RecommendedCarSerializer < ActiveModel::Serializer
   attributes :id
   belongs_to :brand
