@@ -6,7 +6,7 @@ class CarsFinder
   end
 
   DEFAULT_PAGE = 1
-  ITEMS_PER_PAGE = 2
+  ITEMS_PER_PAGE = 20
 
   def initialize(params)
     @params = params
