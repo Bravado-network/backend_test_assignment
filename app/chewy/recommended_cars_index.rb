@@ -1,22 +1,14 @@
 # frozen_string_literal: true
 
 class RecommendedCarsIndex < Chewy::Index
-  settings analysis: {
-    analyzer: {
-      name: {
-        tokenizer: 'keyword',
-        filter: ['lowercase']
-      }
-    }
-  }
-
-  field :user_id
-  field :id
-  field :price
-  field :label
-  field :model, analyzer: 'name'
+  field :user_id, type: 'short'
+  field :id, type: 'integer'
+  field :price, type: 'float'
+  field :label, type: 'keyword'
+  field :rank_score, type: 'float'
+  field :model, type: 'text'
   field :brand do
     field :id
-    field :name, analyzer: 'name'
+    field :name, type: 'text'
   end
 end
