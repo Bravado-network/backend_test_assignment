@@ -40,9 +40,9 @@ class RecommendedCarSerializer < ActiveModel::Serializer
   end
 
   def fetch_rank_score
-    car_rank = CarRanksIndex.filter(term: { user_id: user_id })
-                            .filter(term: { car_id: car.id })
-                            .first&.attributes
+    car_rank = CarRankingsIndex.filter(term: { user_id: user_id })
+                               .filter(term: { car_id: car.id })
+                               .first&.attributes
 
     car_rank&.dig('rank_score')
   end
