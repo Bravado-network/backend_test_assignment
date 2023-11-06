@@ -3,6 +3,8 @@
 class RecommendedCarsFinder
   MissingUserIdError = Class.new(::StandardError)
 
+  attr_reader :params
+
   def initialize(params = {})
     @params = params
   end
@@ -30,8 +32,4 @@ class RecommendedCarsFinder
       price: { order: :asc }
     )
   end
-
-  private
-
-  attr_reader :params
 end
