@@ -3,11 +3,6 @@
 class Car < ApplicationRecord
   belongs_to :brand
 
-  update_index('cars') { self }
-  update_index('brands') do
-    previous_changes['brand_id'] || brand
-  end
-
   scope :search, lambda { |params|
     cars = all.joins(:brand)
     cars = cars.where(Brand.arel_table[:name].matches("%#{params[:query]}%")) if params[:query]
