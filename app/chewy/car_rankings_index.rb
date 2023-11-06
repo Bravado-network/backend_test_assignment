@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class CarRanksIndex < Chewy::Index
+class CarRankingsIndex < Chewy::Index
   field :user_id
   field :car_id
   field :rank_score

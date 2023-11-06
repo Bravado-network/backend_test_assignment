@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class RecommendedCarSerializer < ActiveModel::Serializer
-  alias user scope
   alias car object
+  alias user scope
 
   attributes :id
   belongs_to :brand
