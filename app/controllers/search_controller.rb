@@ -5,10 +5,11 @@ class SearchController < ApplicationController
   DEFAULT_PAGE = 1
 
   def index
-    recommended_cars = RecommendedCarsFinder.new(permitted_params).call
-    recommended_cars = recommended_cars.limit(PAGE_SIZE).offset(page_number)
+    cars = RecommendedCarsFinder.new(permitted_params).call
 
-    render json: recommended_cars.to_json
+    cars = cars.limit(PAGE_SIZE).offset(page_number)
+
+    render json: RecommendedCarsPresenter.new(cars).to_json
   end
 
   private
