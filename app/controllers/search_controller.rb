@@ -5,7 +5,7 @@ class SearchController < ApplicationController
   DEFAULT_PAGE = 1
 
   def index
-    cars = RecommendedCarsFinder.new(permitted_params).call
+    cars = RecommendedCarsFinderService.new(permitted_params).call
 
     cars = cars.limit(PAGE_SIZE).offset(page_number)
 

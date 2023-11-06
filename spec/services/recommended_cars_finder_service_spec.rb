@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe RecommendedCarsFinder do
+RSpec.describe RecommendedCarsFinderService do
   describe '#initialize' do
     it 'assigns the `@params`' do
       finder = described_class.new(user_id: 1, price_min: 30_000, price_max: 40_000, query: 'bmw')

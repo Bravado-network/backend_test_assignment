@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class RecommendedCarsFinder
+class RecommendedCarsFinderService
   MissingUserIdError = Class.new(::StandardError)
 
   attr_reader :params
