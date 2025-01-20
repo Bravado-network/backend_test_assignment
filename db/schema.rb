@@ -10,31 +10,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_17_121316) do
-
+ActiveRecord::Schema[8.0].define(version: 2021_06_17_121316) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+  enable_extension "pg_catalog.plpgsql"
 
   create_table "brands", force: :cascade do |t|
     t.string "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "cars", force: :cascade do |t|
     t.string "model"
     t.bigint "brand_id", null: false
     t.integer "price"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["brand_id"], name: "index_cars_on_brand_id"
   end
 
   create_table "user_preferred_brands", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "brand_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["brand_id"], name: "index_user_preferred_brands_on_brand_id"
     t.index ["user_id"], name: "index_user_preferred_brands_on_user_id"
   end
@@ -42,8 +41,8 @@ ActiveRecord::Schema.define(version: 2021_06_17_121316) do
   create_table "users", force: :cascade do |t|
     t.string "email"
     t.int8range "preferred_price_range"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_foreign_key "cars", "brands"
